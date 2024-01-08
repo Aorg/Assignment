@@ -16,7 +16,6 @@ from langchain.callbacks.manager import CallbackManagerForLLMRun
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
-model_path = "/root/data/model/Shanghai_AI_Laboratory/internlm-chat-7b"
 class InternLM_LLM(LLM):
     # 基于本地 InternLM 自定义 LLM 类
     tokenizer : AutoTokenizer = None
@@ -28,7 +27,7 @@ class InternLM_LLM(LLM):
         super().__init__()
         print("正在从本地加载模型...")
         self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
-        self.model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16, load_in_8bit=True).cuda()
+        self.model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True).to(torch.bfloat16).cuda()
         self.model = self.model.eval()
         print("完成本地模型的加载")
 
@@ -36,11 +35,11 @@ class InternLM_LLM(LLM):
                 run_manager: Optional[CallbackManagerForLLMRun] = None,
                 **kwargs: Any):
         # 重写调用函数
-        # system_prompt = """You are an AI assistant whose name is InternLM (书生·浦语).
-        #                 - InternLM (书生·浦语) is a conversational language model that is developed by Shanghai AI Laboratory (上海人工智能实验室). It is designed to be helpful, honest, and harmless.
-        #                 - InternLM (书生·浦语) can understand and communicate fluently in the language chosen by the user such as English and 中文.
-        #                 """
-        system_prompt = """你是耐心的数学老师，帮助小学生和中学生解决数学问题。"""
+        system_prompt = """你现在是数学老师，仔细审题，详细解题答题 """ 
+        #"""You are an AI assistant whose name is InternLM (书生·浦语).
+        #               - InternLM (书生·浦语) is a conversational language model that is developed by Shanghai AI Laboratory (上海人工智能实验室). It is designed to be helpful, honest, and harmless.
+        #                - InternLM (书生·浦语) can understand and communicate fluently in the language chosen by the user such as English and 中文.
+        #                """
         messages = [(system_prompt, '')]
         response, history = self.model.chat(self.tokenizer, prompt , history=messages)
         return response
@@ -51,6 +50,6 @@ class InternLM_LLM(LLM):
     
 if __name__ == "__main__":
     # 测试代码
-    llm = InternLM_LLM(model_path = model_path)
+    llm = InternLM_LLM(model_path = "/root/data/model/Shanghai_AI_Laboratory/internlm-chat-7b")
     print(llm.predict("你是谁"))
 

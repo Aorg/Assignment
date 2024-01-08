@@ -3,17 +3,16 @@ import gradio as gr
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 import os
-from LLM import InternLM_LLM
+from LLM_math import InternLM_LLM
 from langchain.prompts import PromptTemplate
-rag_model = "/home/chy/api/tutorial/langchain/demo/model/models--sentence-transformers--paraphrase-multilingual-MiniLM-L12-v2"
-llm_model = "/home/chy/.cache/modelscope/hub/Shanghai_AI_Laboratory"
+
 def load_chain():
     # 加载问答链
     # 定义 Embeddings
-    embeddings = HuggingFaceEmbeddings(model_name=rag_model)
-
+    embeddings = HuggingFaceEmbeddings(model_name="/root/data/model/sentence-transformer")
     # 向量数据库持久化路径
-    persist_directory = 'data_base/vector_db/chroma'
+    persist_directory = 'math_base'
+    model_path='/root/data/model/Shanghai_AI_Laboratory/internlm-chat-7b'
 
     # 加载数据库
     vectordb = Chroma(
@@ -21,18 +20,19 @@ def load_chain():
         embedding_function=embeddings
     )
 
-    llm = InternLM_LLM(model_path = llm_model)
+    llm = InternLM_LLM(model_path = model_path)
 
-    template = """
-                    按照给定的格式回答以下问题。
-                    回答时需要遵循以下用---括起来的格式：
-
+    template = """ 回答时需要遵循以下用---括起来的格式：
+                   可参考的解题思路：
+                    ···
+                    {context}
+                    ···
                     ---
-                    Question: 需要回答的问题
-                    Thought: 回答Question我需要做些什么，切入点是什么，思维链路步骤是什么。
-                    record: 记住想到的步骤，一步一步回答。 
-                    answer: 回答record的每一步记录的问题和步骤。
-                    Observation: 回看所有步骤，验证并回答问题，由于面向学生年龄段低，水平参差不齐，请将每一步都详细的解答。
+                    Question: 需要回答的问题。
+                    Thought: 拆解问题，将问题中所有的概念解释一遍。
+                    record: 记录Thought要拆解的问题，把问题抽象为公式。 
+                    answer:  根据recode的步骤，逐条回答record的问题。
+                    Observation: 回看所有步骤，验证并回答问题，请将每一步都详细的解答。
                     Thought: 我现在知道最终答案。如果不太确定，可以重复多次Thought,record,answer,Observation
                     ...（这个思考/行动/行动输入/观察可以重复N次）
                     Final Answer: 原始输入问题的最终答案
@@ -40,11 +40,8 @@ def load_chain():
                     现在开始回答，记得在给出最终答案前多按照指定格式进行一步一步的推理。                     
                     使用以下上下文来回答用户的问题。如果你不知道答案，则重复Thought步骤。
                     Question: {question}
-                    可参考的上下文：
-                    ···
-                    {context}
-                    ···
-                    如果给定的上下文无法让你做出回答，则重复Thought步骤。总是使用中文回答。
+                    
+                    重复record,answer步骤2次。总是使用中文回答。
                     验证过的回答:
                     """
 
@@ -77,6 +74,7 @@ class Model_center():
         try:
             chat_history.append(
                 (question, self.chain({"query": question})["result"]))
+            print(chat_history)
             return "", chat_history
         except Exception as e:
             return e, chat_history

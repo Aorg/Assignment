@@ -102,8 +102,8 @@ def get_text(dir_path):
 
 # 目标文件夹
 tar_dir = [
-    "/home/xlab-app-center/langchain/files/初中数学资料包",
-    "/home/xlab-app-center/langchain/files/小学数学资料包",
+    "../files/初中数学资料包",
+    "../files/小学数学资料包",
     # "/root/data/tutorial/langchain/demo/files/奥数解题思路"
     # "/root/data/InternLM",
     # "/root/data/InternLM-XComposer",

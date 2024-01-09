@@ -212,8 +212,9 @@ qa_chain = RetrievalQA.from_chain_type(llm,retriever=vectordb.as_retriever(),ret
 
 得到的 `qa_chain` 对象即可以实现我们的核心功能，即基于 InternLM 模型的专业知识库助手。我们可以对比该检索问答链和纯 LLM 的问答效果：
 
-![Alt text](images/3.jpg)![Alt text](images/4.jpg)!
+![Alt text](images/3.jpg)
+![Alt text](images/4.jpg)
 回答效果和prompt和向量模型质量，文件质量，切分大小都有关系。
 
 以下是更改了prompt,建立的中小学概念数据库回答的内容：
-[Alt text](images/5.jpg)
+![Alt text](images/5.jpg)

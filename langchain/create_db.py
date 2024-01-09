@@ -3,14 +3,15 @@ from langchain.document_loaders import UnstructuredFileLoader
 from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.document_loaders import PDFMinerLoader,PyPDFLoader,UnstructuredPDFLoader
 from langchain.document_loaders import DirectoryLoader,Docx2txtLoader,UnstructuredWordDocumentLoader
-
+import os
+os.system("pip install sqlite3 == 3.35.0")
  
  
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from tqdm import tqdm
-import os
+
 import re
 
 model_name = "/home/xlab-app-center/sentence-transformer"

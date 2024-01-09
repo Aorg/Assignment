@@ -16,7 +16,10 @@ import re
 model_name = "/home/chy/api/tutorial/langchain/demo/model/sentence-transformer"
 # 定义持久化路径
 persist_directory = 'math_base'
-
+# 目标文件夹
+tar_dir = [
+    "files/",
+]
 # 规范文件名 避免报错
 pat = re.compile(r'[a-z0-9\u4e00-\u9fa5]+')
 def rename_file(file_dir):
@@ -91,21 +94,6 @@ def get_text(dir_path):
                     continue
                 docs.extend(loader.load())
         return docs
-
-
-
-# 目标文件夹
-tar_dir = [
-    # "files/ziliao/初中数学资料包",
-    "/home/chy/api/tutorial/langchain/demo/files/ziliao",
-    # "/root/data/tutorial/langchain/demo/files/奥数解题思路"
-    # "/root/data/InternLM",
-    # "/root/data/InternLM-XComposer",
-    # "/root/data/lagent",
-    # "/root/data/lmdeploy",
-    # "/root/data/opencompass",
-    # "/root/data/xtuner"
-]
 
 # 加载目标文件
 docs = []

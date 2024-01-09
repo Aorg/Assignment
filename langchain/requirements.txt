@@ -226,9 +226,3 @@ zipp=3.17.0=pyhd8ed1ab_0
 zlib=1.2.13=h5eee18b_0
 zstandard=0.19.0=py311h5eee18b_0
 zstd=1.5.5=hc292b87_0
-langchain=0.0.292=pypi_0
-langchain==0.0.292
-chromadb==0.4.15
-sentence-transformers==2.2.2
-unstructured==0.10.30
-markdown==3.3.7

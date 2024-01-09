@@ -13,7 +13,7 @@ from tqdm import tqdm
 import os
 import re
 
-model_name = "/root/data/model/sentence-transformer"
+model_name = "/home/xlab-app-center/sentence-transformer"
 # 定义持久化路径
 persist_directory = 'math_base'
 
@@ -50,7 +50,7 @@ def get_files(dir_path):
                 file_name = rename_file(file_dir)
                 print(file_dir)
                 file_list.append(file_name)
-            elif filename.endswith(".docx" or ".doc"):
+            elif filename.endswith(".docx"):
                 file_dir = os.path.join(filepath, filename)
                 file_name = rename_file(file_dir)
                 print(file_dir)
@@ -84,7 +84,7 @@ def get_text(dir_path):
                 loader = UnstructuredFileLoader(one_file)
             elif file_type == 'pdf':
                 loader = UnstructuredPDFLoader(one_file)
-            elif file_type == ('docx'or "doc"):
+            elif file_type == ('docx'):
                 # loader = DirectoryLoader(one_file,glob="*.doc*", loader_cls=UnstructuredWordDocumentLoader,show_progress=True)
                 loader = Docx2txtLoader(one_file)
                 # loader =  UnstructuredWordDocumentLoader(one_file, mode="elements")
@@ -99,8 +99,8 @@ def get_text(dir_path):
 
 # 目标文件夹
 tar_dir = [
-    "/root/data/tutorial/langchain/demo/files/初中数学资料包",
-    "/root/data/tutorial/langchain/demo/files/小学数学资料包",
+    "/home/xlab-app-center/langchain/files/初中数学资料包",
+    "/home/xlab-app-center/langchain/files/小学数学资料包",
     # "/root/data/tutorial/langchain/demo/files/奥数解题思路"
     # "/root/data/InternLM",
     # "/root/data/InternLM-XComposer",

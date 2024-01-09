@@ -1,18 +1,30 @@
+import os
+os.system("pip install -U openxlab")
+os.system("pip install -U pypdf;pip install langchain==0.0.292")
+os.system("python -m pip install --upgrade pip;pip install modelscope==1.9.5;pip install transformers==4.35.2;pip install streamlit==1.24.0;pip install sentencepiece==0.1.99;pip install accelerate==0.24.1;pip install chromadb==0.4.15;pip install sentence-transformers==2.2.2;pip install unstructured==0.10.30;pip install markdown==3.3.7")
+os.system("git clone https://gitee.com/yzy0612/nltk_data.git  --branch gh-pages;cd nltk_data;mv packages/*  ./;cd tokenizers;unzip punkt.zip;cd ../taggers;unzip averaged_perceptron_tagger.zip")
+from openxlab.model import download
+download(model_repo='OpenLMLab/InternLM-chat-7b',  model_name='InternLM-chat-7b', output='/home/xlab-app-center/')
+# 设置环境变量
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+# 下载模型
+os.system('pip install -U huggingface_hub; huggingface-cli download --resume-download sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 --local-dir /home/xlab-app-center/sentence-transformer')
+os.system("pip install requirements.txt")
+os.system("python langchain/create_db.py")
 # 导入必要的库
 import gradio as gr
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
-import os
-from LLM_math import InternLM_LLM
+from LLM import InternLM_LLM
 from langchain.prompts import PromptTemplate
 
 def load_chain():
     # 加载问答链
     # 定义 Embeddings
-    embeddings = HuggingFaceEmbeddings(model_name="/root/data/model/sentence-transformer")
+    embeddings = HuggingFaceEmbeddings(model_name="/home/xlab-app-center/sentence-transformer")
     # 向量数据库持久化路径
     persist_directory = 'math_base'
-    model_path='/root/data/model/Shanghai_AI_Laboratory/internlm-chat-7b'
+    model_path='/home/xlab-app-center/OpenLMLab/InternLM-chat-7b'
 
     # 加载数据库
     vectordb = Chroma(

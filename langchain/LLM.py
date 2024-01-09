@@ -50,6 +50,6 @@ class InternLM_LLM(LLM):
     
 if __name__ == "__main__":
     # 测试代码
-    llm = InternLM_LLM(model_path = "/root/data/model/Shanghai_AI_Laboratory/internlm-chat-7b")
+    llm = InternLM_LLM(model_path = "/home/xlab-app-center/OpenLMLab/InternLM-chat-7b")
     print(llm.predict("你是谁"))
 

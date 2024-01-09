@@ -169,7 +169,7 @@ vectordb = Chroma.from_documents(
 # 将加载的向量数据库持久化到磁盘上
 vectordb.persist()
 ```
-看看效果
+看看加载效果
 ![Alt text](images/1.jpg)
 向量模型会检索Embedding距离最近的内容，也就是query ,最相似的内容
 

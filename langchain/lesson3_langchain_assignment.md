@@ -23,6 +23,10 @@
 
 # **进阶作业**：
 ## 选择一个垂直领域，收集该领域的专业资料构建专业知识库，并搭建专业问答助手，并在 [OpenXLab](https://openxlab.org.cn/apps) 上成功部署（截图，并提供应用地址）
+    想要部署一个关于中小学数学概念的知识库，
+    需要读取pdf，docx文件转化为向量知识库持久化部署。
+    OpenXLab部署，多次尝试不成功，1.读取pdf文件的库一直有问题。2.第三方和Openxlab中的模型部署，调试，主要是调取规则花了点时间，问题已经解决。 但是在虚拟服务器上和本地是能跑通的。还在尝试中
+![image.png](images/openxlab_confit.jpg)
 ## 1环境配置
 除了教程的环境，如果需要读取pdf,docx文件需要安装以下包
 ```shell
@@ -114,5 +118,7 @@ class InternLM_LLM(LLM):
 
 ## 运行run_gradio.py
 ![image.png](images/5.jpg)
+
+
 
 

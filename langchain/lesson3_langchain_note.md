@@ -38,7 +38,7 @@ cp -r /root/share/temp/model_repos/internlm-chat-7b /root/data/model/Shanghai_AI
 # 我们在使用开源词向量模型构建开源词向量的时候，需要用到第三方库 `nltk` 的一些资源。正常情况下，其会自动从互联网上下载，但可能由于网络原因会导致下载中断，此处我们可以从国内仓库镜像地址下载相关资源，保存到服务器上。
 # 我们用以下命令下载 nltk 资源并解压到服务器上：
 
-```bash
+
 cd /root
 git clone https://gitee.com/yzy0612/nltk_data.git  --branch gh-pages
 cd nltk_data

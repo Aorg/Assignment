@@ -1,4 +1,5 @@
 import os
+print(os.getcwd())
 os.system("pip install -U openxlab")
 os.system("pip install -U pypdf;pip install langchain==0.0.292")
 os.system("python -m pip install --upgrade pip;pip install modelscope==1.9.5;pip install transformers==4.35.2;pip install streamlit==1.24.0;pip install sentencepiece==0.1.99;pip install accelerate==0.24.1;pip install chromadb==0.4.15;pip install sentence-transformers==2.2.2;pip install unstructured==0.10.30;pip install markdown==3.3.7")
@@ -14,6 +15,7 @@ os.system("pip install -r requirements.txt")
 os.system("pip install chromadb==0.3.29;pip install pypdf;pip install pdfminer.six;pip install opencv-python;pip install pytesseract;pip install python-docx")
 os.system("python langchain/create_db.py")
 # 导入必要的库
+print(os.getcwd())
 import gradio as gr
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings

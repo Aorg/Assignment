@@ -1,22 +1,19 @@
 # 首先导入所需第三方库
 import os
 os.system("pip install sqlite3 == 3.35.0;pip install pdf2image;pip install unstructured==0.10.30;pip install pypdf;pip install pdfminer.six;pip install opencv-python;pip install pytesseract;pip install python-docx;pip install docx2txt")
+# 首先导入所需第三方库
 from langchain.document_loaders import UnstructuredFileLoader
-from langchain.document_loaders import UnstructuredMarkdownLoader
-from langchain.document_loaders import PDFMinerLoader,PyPDFLoader,UnstructuredPDFLoader
-from langchain.document_loaders import DirectoryLoader,Docx2txtLoader,UnstructuredWordDocumentLoader
-
-
+from langchain.document_loaders import PyPDFLoader
+from langchain.document_loaders import Docx2txtLoader
  
  
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from tqdm import tqdm
-
 import re
 
-model_name = "/home/xlab-app-center/sentence-transformer"
+model_name = "/home/chy/api/tutorial/langchain/demo/model/sentence-transformer"
 # 定义持久化路径
 persist_directory = 'math_base'
 
@@ -38,12 +35,12 @@ def get_files(dir_path):
         for filename in filenames:
             # 通过后缀名判断文件类型是否满足要求
             # 如果满足要求，将其绝对路径加入到结果列表
-            if filename.endswith(".md"):
-                file_dir = os.path.join(filepath, filename)
-                print(file_dir)
-                file_name = rename_file(file_dir)
-                file_list.append(file_name)
-            elif filename.endswith(".txt"):
+            # if filename.endswith(".md"):
+            #     file_dir = os.path.join(filepath, filename)
+            #     print(file_dir)
+            #     file_name = rename_file(file_dir)
+            #     file_list.append(file_name)
+            if filename.endswith(".txt"):
                 file_dir = os.path.join(filepath, filename)
                 file_name = rename_file(file_dir)
                 print(file_dir)
@@ -64,46 +61,43 @@ def get_files(dir_path):
     
     return file_list
 
-
-
-# 示例用法
-
-
 # 加载文件函数
 def get_text(dir_path):
         print('dir_path',dir_path)
     # args：dir_path，目标文件夹路径
     # 首先调用上文定义的函数得到目标文件路径列表
         file_lst = get_files(dir_path)
+        if('txt'or'pdf'or'docx'in ''.join(file_lst)):
     # if len(file_lst)>0:
         # docs 存放加载之后的纯文本对象
-        docs = []
-        # 遍历所有目标文件
-        for one_file in tqdm(file_lst):
-            file_type = one_file.split('.')[-1]
-            if file_type == 'md':
-                loader = UnstructuredMarkdownLoader(one_file)
-            elif file_type == 'txt':
-                loader = UnstructuredFileLoader(one_file)
-            elif file_type == 'pdf':
-                loader = PyPDFLoader(one_file)
-            elif file_type == ('docx'):
-                # loader = DirectoryLoader(one_file,glob="*.doc*", loader_cls=UnstructuredWordDocumentLoader,show_progress=True)
-                loader = Docx2txtLoader(one_file)
-                # loader =  UnstructuredWordDocumentLoader(one_file, mode="elements")
-              
-            else:
-                # 如果是不符合条件的文件，直接跳过
-                continue
-            docs.extend(loader.load())
+            docs = []
+            # 遍历所有目标文件
+            for one_file in tqdm(file_lst):
+                print(one_file)
+                file_type = one_file.split('.')[-1]
+                # if file_type == 'md':
+                #     loader = UnstructuredMarkdownLoader(one_file)
+                if file_type == 'txt':
+                    loader = UnstructuredFileLoader(one_file)
+                elif file_type == 'pdf':
+                    loader = PyPDFLoader(one_file)
+                elif file_type == ('docx'):
+                    # loader = DirectoryLoader(one_file,glob="*.doc*", loader_cls=UnstructuredWordDocumentLoader,show_progress=True)
+                    loader = Docx2txtLoader(one_file)
+                    # loader =  UnstructuredWordDocumentLoader(one_file)
+                
+                else:
+                    # 如果是不符合条件的文件，直接跳过
+                    continue
+                docs.extend(loader.load())
         return docs
 
 
 
 # 目标文件夹
 tar_dir = [
-    "../files/初中数学资料包",
-    "../files/小学数学资料包",
+    # "files/ziliao/初中数学资料包",
+    "/home/chy/api/tutorial/langchain/demo/files/ziliao",
     # "/root/data/tutorial/langchain/demo/files/奥数解题思路"
     # "/root/data/InternLM",
     # "/root/data/InternLM-XComposer",
@@ -136,3 +130,4 @@ vectordb = Chroma.from_documents(
 )
 # 将加载的向量数据库持久化到磁盘上
 vectordb.persist()
+

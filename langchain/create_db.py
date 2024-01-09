@@ -1,10 +1,11 @@
 # 首先导入所需第三方库
+import os
 os.system("pip install sqlite3 == 3.35.0;pip install pdf2image;pip install unstructured==0.10.30;pip install pypdf;pip install pdfminer.six;pip install opencv-python;pip install pytesseract;pip install python-docx")
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.document_loaders import PDFMinerLoader,PyPDFLoader,UnstructuredPDFLoader
 from langchain.document_loaders import DirectoryLoader,Docx2txtLoader,UnstructuredWordDocumentLoader
-import os
+
 
  
  

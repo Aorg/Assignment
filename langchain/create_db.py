@@ -4,7 +4,7 @@ from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.document_loaders import PDFMinerLoader,PyPDFLoader,UnstructuredPDFLoader
 from langchain.document_loaders import DirectoryLoader,Docx2txtLoader,UnstructuredWordDocumentLoader
 import os
-os.system("pip install sqlite3 == 3.35.0")
+os.system("pip install sqlite3 == 3.35.0;pip install pdf2image")
  
  
 from langchain.text_splitter import RecursiveCharacterTextSplitter

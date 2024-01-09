@@ -86,7 +86,7 @@ def get_text(dir_path):
             elif file_type == 'txt':
                 loader = UnstructuredFileLoader(one_file)
             elif file_type == 'pdf':
-                loader = UnstructuredPDFLoader(one_file)
+                loader = PyPDFLoader(one_file)
             elif file_type == ('docx'):
                 # loader = DirectoryLoader(one_file,glob="*.doc*", loader_cls=UnstructuredWordDocumentLoader,show_progress=True)
                 loader = Docx2txtLoader(one_file)

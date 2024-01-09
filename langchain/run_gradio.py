@@ -11,7 +11,7 @@ os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 # 下载模型
 os.system('pip install -U huggingface_hub; huggingface-cli download --resume-download sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 --local-dir /home/xlab-app-center/sentence-transformer')
 os.system("pip install -r requirements.txt")
-# os.system("pip install chromadb==0.3.29;pip install pypdf;pip install pdfminer.six;pip install opencv-python;pip install pytesseract;pip install python-docx")
+os.system("pip install chromadb==0.3.29;pip install pypdf;pip install pdfminer.six;pip install opencv-python;pip install pytesseract;pip install python-docx")
 os.system("python langchain/create_db.py")
 # 导入必要的库
 import gradio as gr

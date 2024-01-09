@@ -3,10 +3,10 @@
 ## 复现课程知识库助手搭建过程 (截图)
 ### 1.环境代码准备
     配置环境 下载模型 下载代码
-![image.png](images/3langchain/download.jpg)
+![image.png](images/download.jpg)
 ### 2.化为向量知识库 持久化储存
 运行 create_db.py
-![image.png](images/3langchain/1.jpg)
+![image.png](images/1.jpg)
 
 ### 3.基于InternLM模型自定义 LLM 类
     model_path = "下载的internlm-chat-7b模型地址"
@@ -15,7 +15,7 @@
      HuggingFaceEmbeddings(model_name=下载的向量模型位置)
      llm = InternLM_LLM(model_path = 下载的internlm-chat-7b模型地址)
     运行 run_gradio.py
-![image.png](images/3langchain/3.jpg)
+![image.png](images/3.jpg)
 
 
 

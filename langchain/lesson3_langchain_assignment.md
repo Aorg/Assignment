@@ -3,10 +3,7 @@
 ## 复现课程知识库助手搭建过程 (截图)
 ### 1.环境代码准备
     配置环境 下载模型 下载代码
-<<<<<<< HEAD
 
-=======
->>>>>>> eed5406b7fb7092e980ad9d286b1a410600d83b5
 ![Alt text](images/download.jpg)
 ### 2.化为向量知识库 持久化储存
 运行 create_db.py
@@ -21,29 +18,60 @@
     运行 run_gradio.py
 ![image.png](images/3.jpg)
 
-
-
-
-
 # **进阶作业**：
-## 选择一个垂直领域，收集该领域的专业资料构建专业知识库，并搭建专业问答助手，并在 [OpenXLab](https://openxlab.org.cn/apps) 上成功部署（截图，并提供应用地址）
-    想要部署一个关于中小学数学概念的知识库，
-    需要读取pdf，docx文件转化为向量知识库持久化部署。每次输入
+选择一个垂直领域，收集该领域的专业资料构建专业知识库，并搭建专业问答助手，并在 [OpenXLab](https://openxlab.org.cn/apps) 上成功部署（截图，并提供应用地址）
 
-### 部署成功
-   平台部署地址：https://openxlab.org.cn/apps/detail/Aorg/MiddleSchoolMath_AIAssistant
-   
+## 作业截图和地址
+想要部署一个关于中小学数学概念的知识库，
+需要读取pdf，docx文件转化为向量知识库持久化部署。每次输入向量模型将query找出与你的问题相近的文本片段，作为prompt输入大语言模型，再由模型生成。
+
+平台部署地址：
+https://openxlab.org.cn/apps/detail/Aorg/MiddleSchoolMath_AIAssistant
+![Alt text](images/resoult.jpg)
+
+
+## 坑
+
+    OpenXLab部署，多次尝试不成功，
+    1.读取pdf文件的库一直有问题。
+    2.第三方和Openxlab中的模型下载，调用问题已经解决，查看文档https://openxlab.org.cn/docs/apps/%E5%BA%94%E7%94%A8%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96.html。
+    3.资源不足，模型加载不了。 
+    但是在虚拟服务器上和本地是能跑通的。还在尝试中
    申请资源很快就批下来了，选择申请的资源
 ![Alt text](images/resource.jpg)
 改了几个bug，终于部署成功了
 ![Alt text](images/deploy_success.jpg)
----------------------------------------- 部署成功以前的记录---------------------------------------------
-### 第一次部署
-    OpenXLab部署，多次尝试不成功，
-    1.读取pdf文件的库一直有问题。
-    2.第三方和Openxlab中的模型部署，调试，主要是调取规则花了点时间，问题已经解决。
-    3.资源不足，模型加载不了。 
-    但是在虚拟服务器上和本地是能跑通的。还在尝试中
+
+
+### 坑1 
+    model have no fuction chat()
+可能是自己不小心改错了。    
+在LLM.py加载模型中，eval少了括号加上就行
+```python
+    self.model = self.model.eval()
+```
+### 坑2 
+   InternLM-chat-7B模型总是输出一些乱码
+   
+   可能是token长度限制。
+   在使用模型中，从感觉上来说能接收更长token的模型，生成的结果更好.
+   
+   本身prompt较长，所以这次使用了InternLM-chat-7B-8k，暂时还没有遇到报错。
+
+### 坑3
+   向量数据库版本问题，提示需要 某个s开头的0.3.37的版本库的时候，其实是需要更改数版本
+```python
+os.system("pip install chromadb==0.3.29")
+```
+
+### 坑4
+加载模型，如果我们自己用到了.cuda(),之类的，但是资源又只有cpu时，不会报错。
+如果运行不成功检查下，自己模型加载是否超出资源。
+![Alt text](images/bug2.jpg)
+![Alt text](images/bug.jpg)
+
+---------------------------------------- 部署的记录---------------------------------------------
+    
 
 ![image.png](images/openxlab_confit.jpg)
 ## 1环境配置
@@ -180,16 +208,6 @@ os.system("pip install -U openxlab")
 ![Alt text](images/bit4.jpg)    
    需要cuda包支持，跑不了，还是申请资源吧。
 
-#### 坑1, 
-    model have no fuction chat()
-可能是自己不小心改错了。    
-在LLM.py加载模型中，eval少了括号加上就行
-```python
-    self.model = self.model.eval()
-```
-#### 坑2, 
-   InternLM-chat-7B模型总是输出一些乱码，也有token长度限制。在使用模型中，从感觉上来说能接收更长token的模型，生成的结果更好，所以这次使用了InternLM-chat-7B-8k，暂时还没有遇到报错
-   
 
 
 

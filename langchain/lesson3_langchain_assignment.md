@@ -3,7 +3,8 @@
 ## 复现课程知识库助手搭建过程 (截图)
 ### 1.环境代码准备
     配置环境 下载模型 下载代码
-![image.png](images/download.jpg)
+
+![Alt text](images/download.jpg)
 ### 2.化为向量知识库 持久化储存
 运行 create_db.py
 ![image.png](images/1.jpg)

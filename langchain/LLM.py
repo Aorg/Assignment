@@ -27,7 +27,7 @@ class InternLM_LLM(LLM):
         super().__init__()
         print("正在从本地加载模型...")
         self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
-        self.model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True, torch_dtype=torch.bfloat16, load_in_4bit=True)
+        self.model = AutoModelForCausalLM.from_pretrained(model_path, trust_remote_code=True,  device_map='auto', torch_dtype=torch.bfloat16)#load_in_4bit=True
         self.model = self.model.eval
         print("完成本地模型的加载")
 

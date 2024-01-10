@@ -158,7 +158,8 @@ os.system("pip install -U openxlab")
     后来改成cpu加载，发现还是不行， 因为遗漏平台只分配了8G内存。能加载，只能加载一点点...
 ![Alt text](images/bug_notrun.jpg)
     正在申请资源，量化为4bit尝试运行。
-   
+![Alt text](images/bit4.jpg)    
+   需要cuda包支持，跑不了，还是申请资源吧。
 
 
 

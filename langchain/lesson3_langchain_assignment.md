@@ -28,8 +28,23 @@
 # **进阶作业**：
 ## 选择一个垂直领域，收集该领域的专业资料构建专业知识库，并搭建专业问答助手，并在 [OpenXLab](https://openxlab.org.cn/apps) 上成功部署（截图，并提供应用地址）
     想要部署一个关于中小学数学概念的知识库，
-    需要读取pdf，docx文件转化为向量知识库持久化部署。
-    OpenXLab部署，多次尝试不成功，1.读取pdf文件的库一直有问题。2.第三方和Openxlab中的模型部署，调试，主要是调取规则花了点时间，问题已经解决。 但是在虚拟服务器上和本地是能跑通的。还在尝试中
+    需要读取pdf，docx文件转化为向量知识库持久化部署。每次输入
+
+### 部署成功
+   平台部署地址：https://openxlab.org.cn/apps/detail/Aorg/MiddleSchoolMath_AIAssistant
+   
+   申请资源很快就批下来了，选择申请的资源
+![Alt text](images/resource.jpg)
+改了几个bug，终于部署成功了
+![Alt text](images/deploy_success.jpg)
+---------------------------------------- 部署成功以前的记录---------------------------------------------
+### 第一次部署
+    OpenXLab部署，多次尝试不成功，
+    1.读取pdf文件的库一直有问题。
+    2.第三方和Openxlab中的模型部署，调试，主要是调取规则花了点时间，问题已经解决。
+    3.资源不足，模型加载不了。 
+    但是在虚拟服务器上和本地是能跑通的。还在尝试中
+
 ![image.png](images/openxlab_confit.jpg)
 ## 1环境配置
 除了教程的环境，如果需要读取pdf,docx文件需要安装以下包
@@ -164,6 +179,19 @@ os.system("pip install -U openxlab")
     正在申请资源，量化为4bit尝试运行。
 ![Alt text](images/bit4.jpg)    
    需要cuda包支持，跑不了，还是申请资源吧。
+
+#### 坑1, 
+    model have no fuction chat()
+可能是自己不小心改错了。    
+在LLM.py加载模型中，eval少了括号加上就行
+```python
+    self.model = self.model.eval()
+```
+#### 坑2, 
+   InternLM-chat-7B模型总是输出一些乱码，也有token长度限制。在使用模型中，从感觉上来说能接收更长token的模型，生成的结果更好，所以这次使用了InternLM-chat-7B-8k，暂时还没有遇到报错
+   
+
+
 
 
 

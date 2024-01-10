@@ -39,7 +39,7 @@ def load_chain():
         embedding_function=embeddings
     )
 
-    llm = InternLM_LLM(model_path = model_path)
+    llm = InternLM_LLM(model_path = '/home/xlab-app-center/InternLM-chat-7b-8k')
 
     template = """ 回答时需要遵循以下用---括起来的格式：
                    可参考的解题思路：

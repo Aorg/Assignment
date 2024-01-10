@@ -1,6 +1,8 @@
 # 首先导入所需第三方库
 import os
-os.system("pip install sqlite3 == 3.35.0;pip install pdf2image;pip install unstructured==0.10.30;pip install pypdf;pip install pdfminer.six;pip install opencv-python;pip install pytesseract;pip install python-docx;pip install docx2txt")
+print('db工作路径',os.getcwd())
+print('db当前目录'，os.path.abspath(os.curdir)
+os.system("pip install pytesseract;pip install python-docx;pip install docx2txt")
 # 首先导入所需第三方库
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.document_loaders import PyPDFLoader
@@ -15,12 +17,12 @@ import re
 
 model_name = "/home/xlab-app-center/sentence-transformer"
 # 定义持久化路径
-persist_directory = 'math_base'
+persist_directory = '/home/xlab-app-center/math_base'
 # 目标文件夹
 tar_dir = [
     "files",
     "/home/xlab-app-center/files",
-  "/home/xlab-app-center/langchain/files",
+    "/home/xlab-app-center/langchain/files",
 ]
 # 规范文件名 避免报错
 pat = re.compile(r'[a-z0-9\u4e00-\u9fa5]+')

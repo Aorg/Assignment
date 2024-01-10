@@ -32,7 +32,7 @@ class InternLM_LLM(LLM):
         tokenizer.add_tokens(['<sep>', '<pad>', '<mask>', '<predict>', '<FIM_SUFFIX>', '<FIM_PREFIX>', '<FIM_MIDDLE>','<commit_before>','<commit_msg>','<commit_after>','<jupyter_start>','<jupyter_text>','<jupyter_code>','<jupyter_output>','<empty_output>'], special_tokens=True)
 
         print("Creat model...")
-        model = AutoModelForCausalLM.from_pretrained(model_path,torch_dtype=torch.bfloat16, trust_remote_code=True)
+        model = AutoModelForCausalLM.from_pretrained(model_path,trust_remote_code=True)#torch_dtype=torch.bfloat16, 
 
         self.model = self.model.eval
         print("完成本地模型的加载")

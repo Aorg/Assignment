@@ -15,6 +15,7 @@ if not os.path.exists('/home/xlab-app-center/InternLM-chat-7b-8k'):
     # download(model_repo='OpenLMLab/InternLM-chat-7b-8k',output='/home/xlab-app-center/InternLM-chat-7b-8k')
     # YuanLLM/Yuan2-2B-hf
     download(model_repo='YuanLLM/Yuan2-2B-hf',output='/home/xlab-app-center/InternLM-chat-7b-8k')
+    os.system("pip install flash_attn")
 if not os.path.exists('/home/xlab-app-center/sentence-transformer'):
     # 设置环境变量
     os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'

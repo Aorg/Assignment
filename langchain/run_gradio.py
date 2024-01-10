@@ -1,5 +1,6 @@
 import os
-print(os.getcwd())
+print('工作路径',os.getcwd())
+print('当前目录'，os.path.abspath(os.curdir)
 os.system("pip install -U openxlab")
 os.system("pip install -U pypdf;pip install langchain==0.0.292")
 os.system("python -m pip install --upgrade pip;pip install modelscope==1.9.5;pip install transformers==4.35.2;pip install streamlit==1.24.0;pip install sentencepiece==0.1.99;pip install accelerate==0.24.1;pip install chromadb==0.4.15;pip install sentence-transformers==2.2.2;pip install unstructured==0.10.30;pip install markdown==3.3.7")

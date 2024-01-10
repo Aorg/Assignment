@@ -13,12 +13,14 @@ from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from tqdm import tqdm
 import re
 
-model_name = "/home/chy/api/tutorial/langchain/demo/model/sentence-transformer"
+model_name = "/home/xlab-app-center/sentence-transformer"
 # 定义持久化路径
 persist_directory = 'math_base'
 # 目标文件夹
 tar_dir = [
-    "files/",
+    "files",
+    "/home/xlab-app-center/files",
+  "/home/xlab-app-center/langchain/files",
 ]
 # 规范文件名 避免报错
 pat = re.compile(r'[a-z0-9\u4e00-\u9fa5]+')

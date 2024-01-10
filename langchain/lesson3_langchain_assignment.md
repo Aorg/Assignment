@@ -112,12 +112,59 @@ class InternLM_LLM(LLM):
         return "InternLM"
 ```
 
-在上述类定义中，我们分别重写了构造函数和 `_call` 函数：对于构造函数，我们在对象实例化的一开始加载本地部署的 InternLM 模型，从而避免每一次调用都需要重新加载模型带来的时间过长；`_call` 函数是 LLM 类的核心函数，LangChain 会调用该函数来调用 LLM，在该函数中，我们调用已实例化模型的 chat 方法，从而实现对模型的调用并返回调用结果。
-
-在整体项目中，我们将上述代码封装为 LLM.py，后续将直接从该文件中引入自定义的 LLM 类。
-
 ## 运行run_gradio.py
+本地运行成功
 ![image.png](images/5.jpg)
+
+# 尝试在OpenXlab部署应用
+将代码上传到github仓库中
+代码地址：https://github.com/Aorg/Assignment/tree/main/langchain
+
+打开openXlab ，登陆，右上角点击‘+创建’
+
+###  创建Gradio
+如图：
+![Alt text](images/gtadio.jpg)
+
+### 输入仓库地址
+
+### 设置运行代码为 langchain\gradio.py
+![Alt text](images/%E9%85%8D%E7%BD%AE.jpg)
+
+### 同步代码
+![Alt text](images/deploy.jpg)
+由于平台是直接运行 .py文件，需要安装的库都使用os.system，如下
+```python
+import os
+os.system("pip install langchain==0.0.292")
+os.system("git clone https://gitee.com/yzy0612/nltk_data.git  --branch gh-pages;cd nltk_data;mv packages/*  ./;cd tokenizers;unzip punkt.zip;cd ../taggers;unzip averaged_perceptron_tagger.zip")
+```
+
+从openXlab下载模型，默认地址'/home/xlab-app-center'
+```python
+os.system("pip install -U openxlab")
+    from openxlab.model import download
+    download(model_repo='OpenLMLab/InternLM-chat-7b',output='/home/xlab-app-center/InternLM-chat-7b')
+```
+![Alt text](images/download_model.jpg)
+下载完成后
+
+### 成功建立持久化向量知识库
+![Alt text](images/bug.jpg)
+
+### 模型加载失败
+    之前由于代码默认使用cuda，但平台未配置gpu资源，加载模型的时，运行失败
+
+    后来改成cpu加载，发现还是不行， 因为遗漏平台只分配了8G内存。能加载，只能加载一点点...
+![Alt text](images/bug_notrun.jpg)
+    正在申请资源，量化为4bit尝试运行。
+   
+
+
+
+
+
+
 
 
 

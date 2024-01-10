@@ -13,6 +13,7 @@ if not os.path.exists('/home/xlab-app-center/InternLM-chat-7b-8k'):
     os.system("pip install -U openxlab")
     from openxlab.model import download
     download(model_repo='OpenLMLab/InternLM-chat-7b-8k',output='/home/xlab-app-center/InternLM-chat-7b-8k')
+    os.system("python langchain/LLM.py")
     # YuanLLM/Yuan2-2B-hf
 # download(model_repo='YuanLLM/Yuan2-2B-hf',output='/home/xlab-app-center/InternLM-chat-7b-8k')
     # os.system("pip install flash_attn")
@@ -25,6 +26,7 @@ if not os.path.exists('/home/xlab-app-center/sentence-transformer'):
 
 os.system("pip install -r langchain/requirements.txt")
 os.system("pip install chromadb==0.3.29;pip install opencv-python;pip install pytesseract;pip install python-docx;pip install -U pypdf;")#pip install chromadb==0.3.29;
+os.system("pip install datasets==2.12.0;pip install gradio==3.37.0;pip install matplotlib==3.7.2;pip install numpy==1.24.4;pip install peft==0.5.0;")
 os.system("python langchain/create_db.py")
 # 导入必要的库
 print(os.getcwd())

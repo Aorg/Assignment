@@ -34,7 +34,7 @@ class InternLM_LLM(LLM):
         # print("Creat model...")
         # model = AutoModelForCausalLM.from_pretrained(model_path,torch_dtype=torch.bfloat16, trust_remote_code=True)#torch_dtype=torch.bfloat16, 
 
-        self.model = self.model.eval
+        self.model = self.model.eval()
         print("完成本地模型的加载")
 
     def _call(self, prompt : str, stop: Optional[List[str]] = None,
@@ -57,5 +57,5 @@ class InternLM_LLM(LLM):
 if __name__ == "__main__":
     # 测试代码
     llm = InternLM_LLM(model_path = "/home/xlab-app-center/InternLM-chat-7b-8k")
-    print(llm.predict("你是谁"))
+    print(llm._call("你是谁"))
 

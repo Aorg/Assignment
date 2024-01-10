@@ -17,7 +17,7 @@ os.system("pip install opencv-python;pip install pytesseract;pip install python-
 
 os.system("python langchain/create_db.py")
 # 导入必要的库
-print(os.listdir('/home/xlab-app-center/')
+print(os.listdir('/home/xlab-app-center/'))
 print(os.getcwd())
 import gradio as gr
 from langchain.vectorstores import Chroma

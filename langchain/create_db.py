@@ -20,9 +20,7 @@ model_name = "/home/xlab-app-center/sentence-transformer"
 persist_directory = '/home/xlab-app-center/math_base'
 # 目标文件夹
 tar_dir = [
-    "files",
-    "/home/xlab-app-center/files",
-    "/home/xlab-app-center/langchain/files",
+    "/home/xlab-app-center/langchain/files"
 ]
 # 规范文件名 避免报错
 pat = re.compile(r'[a-z0-9\u4e00-\u9fa5]+')

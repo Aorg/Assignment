@@ -1,7 +1,7 @@
 # 首先导入所需第三方库
 import os
 print('db工作路径',os.getcwd())
-print('db当前目录',os.path.abspath(os.curdir)
+print('db当前目录',os.path.abspath(os.curdir))
 os.system("pip install pytesseract;pip install python-docx;pip install docx2txt")
 # 首先导入所需第三方库
 from langchain.document_loaders import UnstructuredFileLoader

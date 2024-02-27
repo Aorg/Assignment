@@ -11,11 +11,11 @@
 # 进阶作业（可选做）
 
 ## 完成浦语·灵笔的图文理解及创作部署（需截图）
-![image.png](images\4.png)
+![image.png](images/4.png)
 
 ## 完成 Lagent 工具调用 Demo 创作部署（需截图）
-![image.png](images\6.png)
-![image.png](images\7.png)
+![image.png](images/6.png)
+![image.png](images/7.png)
 #### 完整的InternLM-XComposer交互，输出(未复制生成图片)如下:
 输入:敦煌 雷公，masterpiece，栩栩如生，大师之作，中国古典
 输出：

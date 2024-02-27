@@ -4,8 +4,8 @@
 ![image.png](images/1.png)
 
 ## 熟悉 hugging face 下载功能，使用 huggingface_hub python 包，下载 InternLM-20B 的 config.json 文件到本地（需截图下载过程）。
-![image.png](images\2.png)
-![image.png](images\3.png)
+![image.png](images/2.png)
+![image.png](images/3.png)
 
 
 # 进阶作业（可选做）

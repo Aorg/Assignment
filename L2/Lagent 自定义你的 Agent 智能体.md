@@ -1,0 +1,91 @@
+扫码参加白嫖A100
+
+![1728978884769](image/书生白嫖A100活动之——OpenCompass/1728978884769.png)
+
+教程：
+
+[https://github.com/InternLM/Tutorial/blob/camp3/docs/L2/Huixiangdou/readme.md](https://github.com/InternLM/Tutorial/blob/camp3/docs/L2/Huixiangdou/readme.md "https://github.com/InternLM/Tutorial/blob/camp3/docs/L2/Huixiangdou/readme.md") 是由书生·浦语团队开发的一款开源、专门针对国内企业级使用场景设计并优化的知识问答工具。
+
+# 茴香豆概览，特点：
+
+三阶段 Pipeline （前处理、拒答、响应），提高相应准确率和安全性
+
+打通微信和飞书群聊天，适合国内知识问答场景
+
+支持各种硬件配置安装，安装部署限制条件少
+
+适配性强，兼容多个 LLM 和 API
+
+傻瓜操作，安装和配置方便
+
+![](https://i-blog.csdnimg.cn/direct/3e70bdca13304c83b35ec2952ab43d49.png)![]()**编辑**
+
+# 进入 茴香豆
+
+ [OpenXLab浦源 - 应用中心](https://openxlab.org.cn/apps/detail/tpoisonooo/huixiangdou-web "OpenXLab浦源 - 应用中心")
+
+# 创建知识库
+
+填写知识库名称 输入密码 就进入知识库了
+
+![](https://i-blog.csdnimg.cn/direct/4c2f68b40e6d4c5489bc0be8cfa9e5d6.png)![]()**编辑**
+
+# 上传资料
+
+![](https://i-blog.csdnimg.cn/direct/4197190765a64015afc62e7e1546f41e.png)![]()**编辑**
+
+ 完成上传：
+
+# 输入需要在文档中查找的相关问题
+
+ ![](https://i-blog.csdnimg.cn/direct/a2d53167ef004030b949743853047852.png)![]()**编辑**
+
+# 通过配置正反例调优知识助手效果
+
+在真实的使用场景中，调试知识助手回答相关问题和拒答无关问题（如闲聊）是保证回答准确率和效率十分重要的部分。茴香豆的架构中，除了利用 LLM 的功能判断问题相关性，也可以通过手动添加正例（希望模型回答的问题）和反例（希望模型拒答的问题）来调优知识助手的应答效果。
+
+在 Web 版茴香豆中，点击添加正反例下的 `查看或编辑` 按钮，进入正反例添加页面：
+
+tips : 测试回答每次搜完记得refresh 有上下文读取
+
+## 正例
+
+![](https://i-blog.csdnimg.cn/direct/ce0dfb9d14f04f8f938000efe7c86057.png)![]()**编辑**
+
+调整前
+
+![](https://i-blog.csdnimg.cn/direct/c49a00cea3f54efb84e26b73d4d23ab0.png)![]()**编辑**
+
+ 调整后
+
+![](https://i-blog.csdnimg.cn/direct/74dc4a5ffed8439e9e878e37fabfcd50.png)![]()**编辑**
+
+![](https://i-blog.csdnimg.cn/direct/163063879689487c9f465ba317c46620.png)![]()**编辑**
+
+正例
+
+![](https://i-blog.csdnimg.cn/direct/f6706e29c0b04f12833e7d7440e27588.png)![]()**编辑**
+
+负例
+
+![](https://i-blog.csdnimg.cn/direct/9b24b63a7c114a27928f06dd0c30c88c.png)![]()**编辑**
+
+对于正例相似问题，茴香豆会在知识库中尽量搜寻相关解答，在没有相关知识的情况下，会推测答案，并在回答中提示我们该回答并不准确。这保证了回答的可追溯性。
+
+# 1.4 （选做）在微信群或飞书群内使用茴香豆助手
+
+配置发布：
+
+![](https://i-blog.csdnimg.cn/direct/f2120aaa85464ac6a7cce1428e71f169.png)![]()**编辑**
+
+ 加入群聊：
+
+![](https://i-blog.csdnimg.cn/direct/906b680bea004ec7996256c62c6d26f9.png)![]()**编辑**
+
+ 一直遇到这个问题，接口没有报错，只有日志记录这个问题：
+
+![](https://i-blog.csdnimg.cn/direct/58d21d375bdd45aeb64446dd2da79b7b.png)![]()**编辑**
+
+遇到这个问题一直没解决
+
+![](https://i-blog.csdnimg.cn/direct/d63a717c395549858d4f907fd8f1ed0f.png)![]()**编辑**

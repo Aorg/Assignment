@@ -341,4 +341,22 @@ openMind Library是一个深度学习开发套件，通过简单易用的API支�
 ### 2.3.2 上传模型
 在魔乐社区一般有两种方法，第一种是安装好openmid后使用openmind的API来上传文件，另一个就是用git命令来推送文件，跟一般的git工作流相类似。可参考上传文件 | 魔乐社区
 
-git remote set-url origin git@github.com:
+# 额外的
+codespace 更改代码 更新至仓库
+总是遇到问题
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+存放位置
+```bash
+cat /home/codespace/.ssh/id_rsa.pub
+```
+位置不对 每次上传
+ssh key都不对
+![alt text](image-24.png)
+执行
+```bash
+mkdir -p ~/.ssh
+ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+```
+这样就能正确更新了

@@ -340,3 +340,5 @@ openMind Library是一个深度学习开发套件，通过简单易用的API支�
 
 ### 2.3.2 上传模型
 在魔乐社区一般有两种方法，第一种是安装好openmid后使用openmind的API来上传文件，另一个就是用git命令来推送文件，跟一般的git工作流相类似。可参考上传文件 | 魔乐社区
+
+git remote set-url origin git@github.com:

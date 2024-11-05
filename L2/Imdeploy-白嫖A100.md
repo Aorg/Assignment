@@ -1,14 +1,10 @@
-# 扫码参加 - 白嫖A100
-
-![1728978884769](image/书生白嫖A100活动之——OpenCompass/1728978884769.png)
-
 # 概览
 
 书生封装了自己的模型部署工具“Imdeploy”
 
 架构如下：
-
-![](https://i-blog.csdnimg.cn/direct/b071114d14aa45788093bfa800bf48e3.png)![]()**编辑**
+![alt text](image/Imdeploy/image.png)
+​​
 
 * 模型推理/服务。主要提供模型本身的推理，一般来说可以和具体业务解耦，专注模型推理本身性能的优化。可以以模块、API等多种方式提供。
 * Client。可以理解为前端，与用户交互的地方。
@@ -81,11 +77,11 @@ lmdeploy chat turbomind Qwen/Qwen-7B-Chat --model-name qwen-7b
 lmdeploy chat turbomind /share/temp/model_repos/internlm-chat-7b/  --model-name internlm-chat-7b
 ```
 
-以上命令都会启动一个本地对话界面，通过 Bash 可以与 LLM 进行对![1728961868636](image/Imdeploy-白嫖A100/1728961868636.png)。
+以上命令都会启动一个本地对话界面，通过 Bash 可以与 LLM 进行对![1728961868636](image/Imdeploy/1728961868636.png)。
 
 7B模型 推理占用显存23GB+
 
-![1728961868636](image/Imdeploy-白嫖A100/1728961868636.png)
+![1728961868636](image/Imdeploy/1728961868636.png)
 
 #### 2.1.2 离线转换
 
@@ -104,13 +100,13 @@ lmdeploy convert internlm-chat-7b  /root/share/temp/model_repos/internlm-chat-7b
 
 执行完成后将会在当前目录生成一个 `workspace` 的文件夹。这里面包含的就是 TurboMind 和 Triton “模型推理”需要到的文件。
 
-![1728952856618](image/Imdeploy-白嫖A100/1728952856618.png)
+![1728952856618](image/Imdeploy/1728952856618.png)
 
-![1728937679827](image/Imdeploy-白嫖A100/1728937679827.png)
+![1728937679827](image/Imdeploy/1728937679827.png)
 
 转换后的文件结构：
 
-![1728952999910](image/Imdeploy-白嫖A100/1728952999910.png)
+![1728952999910](image/Imdeploy/1728952999910.png)
 
 ### 2.2 TurboMind 推理+命令行本地对话
 
@@ -129,7 +125,7 @@ lmdeploy chat turbomind ./workspace
 
 启动后就可以和它进行对话了，如下图所示。
 
-![1728953171196](image/Imdeploy-白嫖A100/1728953171196.png)
+![1728953171196](image/Imdeploy/1728953171196.png)
 
 ### 2.3 TurboMind推理+API服务
 
@@ -150,13 +146,13 @@ lmdeploy serve api_server ./workspace \
 
 上面的参数中 `server_name` 和 `server_port` 分别表示服务地址和端口，`tp` 参数我们之前已经提到过了，表示 Tensor 并行。还剩下一个 `instance_num` 参数，表示实例数，可以理解成 Batch 的大小。执行后如下图所示。
 
-![1728954096579](image/Imdeploy-白嫖A100/1728954096579.png)
+![1728954096579](image/Imdeploy/1728954096579.png)
 
 ```
 lmdeploy serve api_client http://localhost:23333
 ```
 
-![1728955687954](image/Imdeploy-白嫖A100/1728955687954.png)
+![1728955687954](image/Imdeploy/1728955687954.png)
 
 **POST**[/v1/chat/completions](http://localhost:23333/#/default/chat_completions_v1_v1_chat_completions_post)
 
@@ -177,11 +173,11 @@ lmdeploy serve api_client http://localhost:23333
   "ignore_eos": false
 }
 
-![1728954658278](image/Imdeploy-白嫖A100/1728954658278.png)
+![1728954658278](image/Imdeploy/1728954658278.png)
 
 200OK 表示调用api成功
 
-![1728955842082](image/Imdeploy-白嫖A100/1728955842082.png)
+![1728955842082](image/Imdeploy/1728955842082.png)
 
 ### 2.4 网页 Demo 演示(gradio)
 
@@ -197,9 +193,9 @@ lmdeploy serve gradio http://0.0.0.0:23333 \
 	--restful_api True
 ```
 
-![1728956617169](image/Imdeploy-白嫖A100/1728956617169.png)
+![1728956617169](image/Imdeploy/1728956617169.png)
 
-![1728956426853](image/Imdeploy-白嫖A100/1728956426853.png)
+![1728956426853](image/Imdeploy/1728956426853.png)
 
 #### 2.4.2 TurboMind 推理作为后端
 
@@ -212,9 +208,9 @@ lmdeploy serve gradio ./workspace
 
 可以直接启动 Gradio，此时没有 API Server，TurboMind 直接与 Gradio 通信。如下图所示。
 
-![1728956738512](image/Imdeploy-白嫖A100/1728956738512.png)
+![1728956738512](image/Imdeploy/1728956738512.png)
 
-![1728956717970](image/Imdeploy-白嫖A100/1728956717970.png)
+![1728956717970](image/Imdeploy/1728956717970.png)
 
 ### 2.5 TurboMind 推理 + Python 代码集成
 
@@ -251,7 +247,7 @@ print(response)
 
 Prompt 其实就是增加了 `<|System|>` 消息和 `<|User|>` 消息（即用户的 `query`），以及一个 `<|Bot|>` 的标记，表示接下来该模型输出响应了。最终输出的响应内容如下所示。
 
-![1728957280189](image/Imdeploy-白嫖A100/1728957280189.png)
+![1728957280189](image/Imdeploy/1728957280189.png)
 
 ### 2.6 这么多，头秃，有没有最佳实践
 
@@ -281,9 +277,9 @@ python infer_compare.py lmdeploy
 
 * 效率对比
 * Huggingface 的 Transformer 用时：
-* ![1728957840289](image/Imdeploy-白嫖A100/1728957840289.png)
+* ![1728957840289](image/Imdeploy/1728957840289.png)
 * LMDeploy 用时：
-* ![1728957856491](image/Imdeploy-白嫖A100/1728957856491.png)
+* ![1728957856491](image/Imdeploy/1728957856491.png)
 
 后面的 API 服务和 Client 就得分场景了。
 
@@ -432,9 +428,9 @@ lmdeploy lite calibrate \
 > * 第一步：复制 `calib_dataloader.py` 到安装目录替换该文件：`cp /root/share/temp/datasets/c4/calib_dataloader.py  /root/.conda/envs/lmdeploy/lib/python3.10/site-packages/lmdeploy/lite/utils/`
 > * 第二步：将用到的数据集（c4）复制到下面的目录：`cp -r /root/share/temp/datasets/c4/ /root/.cache/huggingface/datasets/`
 
-![1728958042602](image/Imdeploy-白嫖A100/1728958042602.png)
+![1728958042602](image/Imdeploy/1728958042602.png)
 
-![1728958964976](image/Imdeploy-白嫖A100/1728958964976.png)
+![1728958964976](image/Imdeploy/1728958964976.png)
 
 第二步：通过 minmax 获取量化参数。主要就是利用下面这个公式，获取每一层的 K V 中心值（zp）和缩放值（scale）。
 
@@ -460,7 +456,7 @@ lmdeploy lite kv_qparams \
 
 在这个命令中，`num_tp` 的含义前面介绍过，表示 Tensor 的并行数。每一层的中心值和缩放值会存储到 `workspace` 的参数目录中以便后续使用。`kv_sym` 为 `True` 时会使用另一种（对称）量化方法，它用到了第一步存储的绝对值最大值，而不是最大值和最小值。
 
-![1728959124326](image/Imdeploy-白嫖A100/1728959124326.png)
+![1728959124326](image/Imdeploy/1728959124326.png)
 
 第三步：修改配置。也就是修改 `weights/config.ini` 文件，这个我们在《2.6.2 模型配置实践》中已经提到过了（KV int8 开关），只需要把 `quant_policy` 改为 4 即可。
 
@@ -468,7 +464,7 @@ lmdeploy lite kv_qparams \
 
 接下来就可以正常运行前面的各种服务了，只不过咱们现在可是用上了 KV Cache 量化，能更省（运行时）显存了。
 
-![1728960128005](image/Imdeploy-白嫖A100/1728960128005.png)
+![1728960128005](image/Imdeploy/1728960128005.png)
 
 显存从23GB 到 14GB
 
@@ -527,7 +523,7 @@ lmdeploy lite auto_awq \
 
 命令中 `w_bits` 表示量化的位数，`w_group_size` 表示量化分组统计的尺寸，`work_dir` 是量化后模型输出的位置。这里需要特别说明的是，因为没有 `torch.int4`，所以实际存储时，8个 4bit 权重会被打包到一个 int32 值中。所以，如果你把这部分量化后的参数加载进来就会发现它们是 int32 类型的。
 
-![1728961263188](image/Imdeploy-白嫖A100/1728961263188.png)
+![1728961263188](image/Imdeploy/1728961263188.png)
 
 最后一步：转换成 TurboMind 格式。
 
@@ -573,7 +569,7 @@ lmdeploy convert  internlm-chat-7b ./quant_output \
 
 总而言之，W4A16 参数量化后能极大地降低显存，同时相比其他框架推理速度具有明显优势。
 
-![1728962041845](image/Imdeploy-白嫖A100/1728962041845.png)
+![1728962041845](image/Imdeploy/1728962041845.png)
 
 显存直接到6GB左右
 
@@ -721,7 +717,7 @@ lmdeploy serve gradio localhost:33337 \
 **基础作业：**
 
 * 使用 LMDeploy 以本地对话、网页Gradio、API服务中的一种方式部署 InternLM-Chat-7B 模型，生成 300 字的小故事（需截图）
-* ![1728962560802](image/Imdeploy-白嫖A100/1728962560802.png)
+* ![1728962560802](image/Imdeploy/1728962560802.png)
 
 **进阶作业（可选做）**
 
@@ -730,17 +726,17 @@ lmdeploy serve gradio localhost:33337 \
 * 转换的模型使用14G
 * 模型量化前
 
-  ![1728965783090](image/Imdeploy-白嫖A100/1728965783090.png)
+  ![1728965783090](image/Imdeploy/1728965783090.png)
 
   后
 
-  ![1728964546631](image/Imdeploy-白嫖A100/1728964546631.png)
+  ![1728964546631](image/Imdeploy/1728964546631.png)
 * KV Cache量化前
 
-  ![1728965783090](image/Imdeploy-白嫖A100/1728965783090.png)
+  ![1728965783090](image/Imdeploy/1728965783090.png)
 * 后
 
-  ![1728964935701](image/Imdeploy-白嫖A100/1728964935701.png)
+  ![1728964935701](image/Imdeploy/1728964935701.png)
 * 在自己的任务数据集上任取若干条进行Benchmark测试，测试方向包括：
   （1）TurboMind推理+Python代码集成
   （2）在（1）的基础上采用W4A16量化

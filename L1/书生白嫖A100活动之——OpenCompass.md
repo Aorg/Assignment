@@ -1,6 +1,3 @@
-扫码参加-白嫖A100
-
-![1729033461435](image/提示词工程课程/1729033461435.png)
 
 ![img](https://i-blog.csdnimg.cn/direct/3af9e40cd47d4207a8ef0ab78480b986.png)![]()**编辑**
 

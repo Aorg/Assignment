@@ -1,11 +1,8 @@
- 扫码立刻参与白嫖A100，书生大模型微调部署学习活动。亲测有效
-
-![1728979017919](image/XTuner微调LLM/1728979017919.png)
-
 内容来源：[Tutorial/xtuner/personal_assistant_document.md at camp2 · InternLM/Tutorial · GitHub**LLM Tutorial. Contribute to InternLM/Tutorial development by creating an account on GitHub.**![](https://csdnimg.cn/release/blog_editor_html/release2.3.7/ckeditor/plugins/CsdnLink/icons/icon-default.png?t=O83A)https://github.com/InternLM/Tutorial/blob/camp2/xtuner/personal_assistant_document.md](https://github.com/InternLM/Tutorial/blob/camp2/xtuner/personal_assistant_document.md "Tutorial/xtuner/personal_assistant_document.md at camp2 · InternLM/Tutorial · GitHub")
 
 # Xtuner运行原理：
 
+![alt text](image-23.png)
 黄色表示：数据处理、微调方法选择如lora，LLM选择
 
 蓝色表示：xtuner根据选择的数据自动加载数据，根据LLM选择相应的prompt_templat，自动做数据映射。处理完的数据可以直接输入模型训练
@@ -14,7 +11,6 @@
 
 紫色表示：整合微调的权重和LLMs，部署LLM
 
-![](https://i-blog.csdnimg.cn/direct/5900b6d3fad54d64838e3c52b00836de.png)![]()**编辑**
 
 总的来说 xtuner是一个便捷的llm微调测试工具。
 
@@ -50,10 +46,7 @@ cd /root/xtuner0117/xtuner
 # 从源码安装 XTuner
 pip install -e '.[all]' -i https://mirrors.aliyun.com/pypi/simple/
 ```
-
-![]()
-
-![](https://i-blog.csdnimg.cn/direct/4e6e613654674858b518f3bdc2632124.png)![]()**编辑**
+![alt text](image-24.png)
 
 ### 2.2 前期准备
 
@@ -69,8 +62,6 @@ mkdir -p /root/ft/data && cd /root/ft/data
 # 创建 `generate_data.py` 文件
 touch /root/ft/data/generate_data.py
 ```
-
-![]()
 
 ```python
 import json
@@ -108,7 +99,7 @@ with open('personal_assistant.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
 ```
 
-![]()
+
 
 name="" 改为自己的名字
 
@@ -122,13 +113,11 @@ cd /root/ft/data
 python /root/ft/data/generate_data.py
 ```
 
-![]()
-
 生成训练数据集：
 
-![img](https://i-blog.csdnimg.cn/direct/d4d55fe559f244c5ac3ba7dfc0df77f4.png)![img]()
+![alt text](image-1.png)
 
-![](https://i-blog.csdnimg.cn/direct/5a43b20a4881416f817d3d9d5d702568.png)![]()**编辑**
+![alt text](image-2.png)
 
 #### 2.2.2 模型准备
 
@@ -143,8 +132,6 @@ mkdir -p /root/ft/model
 cp -r /root/share/new_models/Shanghai_AI_Laboratory/internlm2-chat-1_8b/* /root/ft/model/
 ```
 
-![]()
-
 假如大家存储空间不足，我们也可以通过以下代码一键通过符号链接的方式链接到模型文件，这样既节省了空间，也便于管理。
 
 ```bash
@@ -155,11 +142,9 @@ rm -rf /root/ft/model
 ln -s /root/share/new_models/Shanghai_AI_Laboratory/internlm2-chat-1_8b /root/ft/model
 ```
 
-![]()
 
  输入Xtuner 有详细的执行命令教程
-
-![](https://i-blog.csdnimg.cn/direct/c91bf36b7425487eaf2749b7c397e64f.png)![]()**编辑**
+![alt text](image-3.png)
 
 ```bash
 # 列出所有内置配置文件
@@ -168,12 +153,8 @@ ln -s /root/share/new_models/Shanghai_AI_Laboratory/internlm2-chat-1_8b /root/ft
 # 假如我们想找到 internlm2-1.8b 模型里支持的配置文件
 xtuner list-cfg -p internlm2_1_8b
 ```
-
-![]()
-
-![](https://i-blog.csdnimg.cn/direct/0ca9e7607e0449bcb010885ade597767.png)![]()**编辑**
-
-![](https://i-blog.csdnimg.cn/direct/d0060366d3344fe099b7b328aeaa776b.png)![]()**编辑**
+![alt text](image-4.png)
+![alt text](image-5.png)
 
 ```bash
 # 创建一个存放 config 文件的文件夹
@@ -182,12 +163,8 @@ mkdir -p /root/ft/config
 # 使用 XTuner 中的 copy-cfg 功能将 config 文件复制到指定的位置
 xtuner copy-cfg internlm2_1_8b_qlora_alpaca_e3 /root/ft/config
 ```
-
-![]()
-
  操作完，文件列表：
-
-![](https://i-blog.csdnimg.cn/direct/aa24dfee73f5476fa082e52e0a178bcf.png)![]()**编辑**
+![alt text](image-6.png)
 
 #### 2.3 配置文件修改
 
@@ -423,8 +400,6 @@ randomness = dict(seed=None, deterministic=False)
 log_processor = dict(by_epoch=False)
 ```
 
-![]()
-
 ### 2.4 模型训练
 
 #### 2.4.1 常规训练
@@ -438,25 +413,23 @@ log_processor = dict(by_epoch=False)
 xtuner train /root/ft/config/internlm2_1_8b_qlora_alpaca_e3_copy.py --work-dir /root/ft/train
 ```
 
-![]()
-
 30% A100 使用情况，10G用不到：
 
-![](https://i-blog.csdnimg.cn/direct/c3f6114479a343a78b0fca0eec82da46.png)![]()**编辑**![](https://i-blog.csdnimg.cn/direct/cef7ea5fb22840bb8b3092e0962e17d9.png)![]()**编辑**
+![alt text](image-7.png)
+
 
 ##### 2.4.2.1evaluate 结果1
 
-![](https://i-blog.csdnimg.cn/direct/0d68cf89e6ec47e6801f0527aa30d2cb.png)![]()**编辑**
 
 失败了 增加epoch数量到5
 
-![](https://i-blog.csdnimg.cn/direct/db1aff9ce6a641c593d90b3b9ffcea55.png)![]()**编辑**
+![alt text](image-8.png)
 
 失败了 增加epoch数量到10
 
-![](https://i-blog.csdnimg.cn/direct/2d505144ab524841b6063d913e203469.png)![]()**编辑**
+![alt text](image-9.png)
+![alt text](image-10.png)
 
-![](https://i-blog.csdnimg.cn/direct/439cc549e7e242bd84bb5ec1ea4e8e2b.png)![]()**编辑**
 
 #### 2.4.2 使用 deepspeed 来加速训练
 
@@ -486,8 +459,6 @@ DeepSpeed是一个深度学习优化库，由微软开发，旨在提高大规�
 xtuner train /root/ft/config/internlm2_1_8b_qlora_alpaca_e3_copy.py --work-dir /root/ft/train_deepspeed --deepspeed deepspeed_zero2
 ```
 
-![]()
-
 可以看到，通过 `deepspeed` 来训练后得到的权重文件和原本的权重文件是有所差别的，原本的仅仅是一个 .pth 的文件，而使用了 `deepspeed` 则是一个名字带有 .pth 的文件夹，在该文件夹里保存了两个 .pt 文件。当然这两者在具体的使用上并没有太大的差别，都是可以进行转化并整合。
 
 ```
@@ -515,11 +486,9 @@ xtuner train /root/ft/config/internlm2_1_8b_qlora_alpaca_e3_copy.py --work-dir /
         |-- mp_rank_00_model_states.pt
 ```
 
-![]()
-
 #### 2.4.3 训练结果
 
-![](https://i-blog.csdnimg.cn/direct/2d230fd3bdfc492f9168bdc4f1617a3b.png)![]()**编辑**
+![alt text](image-11.png)
 
 但是其实无论是用哪种方式进行训练，得到的结果都是大差不差的。我们由于设置了300轮评估一次，所以我们可以对比一下300轮和600轮的评估问题结果来看看差别。
 
@@ -546,7 +515,6 @@ xtuner train /root/ft/config/internlm2_1_8b_qlora_alpaca_e3_copy.py --work-dir /
 xtuner train /root/ft/config/internlm2_1_8b_qlora_alpaca_e3_copy.py --work-dir /root/ft/train --resume /root/ft/train/iter_600.pth
 ```
 
-![]()
 
 在实测过程中，虽然权重文件并没有发生改变，但是会多一个以时间戳为名的训练过程文件夹保存训练的过程数据。
 
@@ -575,7 +543,6 @@ xtuner train /root/ft/config/internlm2_1_8b_qlora_alpaca_e3_copy.py --work-dir /
             |-- config.py
 ```
 
-![]()
 
 #### 2.4.4 小结
 
@@ -592,7 +559,6 @@ xtuner train congif.py \
 
 ```
 
-![]()
 
 在本节我们的重点是讲解模型训练过程中的种种细节内容，包括了模型训练中的各个参数以、权重文件的选择方式以及模型续训的方法。可以看到是否使用 `--work-dir` 和 是否使用 `--deepspeed` 会对文件的保存位置以及权重文件的保存方式有所不同，大家也可以通过实践去实际的测试感受一下。那么在训练完成后，我们就可以把训练得到的 .pth 文件进行下一步的转换和整合工作了！
 
@@ -620,10 +586,8 @@ pip install setuptools==69.5.1
 # xtuner convert pth_to_hf ${配置文件地址} ${权重文件地址} ${转换后模型保存地址}
 xtuner convert pth_to_hf /root/ft/train/internlm2_1_8b_qlora_alpaca_e3_copy.py /root/ft/train/iter_768.pth /root/ft/huggingface
 ```
-
-![]()
-
-![](https://i-blog.csdnimg.cn/direct/f01f86e22c9945b0842c12e33069e2b6.png)![]()**编辑** ![](https://i-blog.csdnimg.cn/direct/320e7845aaad4060be07f58c98b3f34a.png)![]()**编辑**
+![alt text](image-12.png)
+![alt text](image-13.png)
 
 **此时，huggingface 文件夹即为我们平时所理解的所谓 “LoRA 模型文件”**
 
@@ -638,7 +602,7 @@ xtuner convert pth_to_hf /root/ft/train/internlm2_1_8b_qlora_alpaca_e3_copy.py /
 
 假如有特定的需要，我们可以在上面的转换指令后进行添加。由于本次测试的模型文件较小，并且已经验证过拟合，故没有添加。假如加上的话应该是这样的：
 
-```
+```bash
 xtuner convert pth_to_hf /root/ft/train/internlm2_1_8b_qlora_alpaca_e3_copy.py /root/ft/train/iter_768.pth /root/ft/huggingface --fp32 --max-shard-size 2GB
 ```
 
@@ -662,9 +626,7 @@ export MKL_SERVICE_FORCE_INTEL=1
 xtuner convert merge /root/ft/model /root/ft/huggingface /root/ft/final_model
 ```
 
-![]()
-
-![](https://i-blog.csdnimg.cn/direct/96477863b4ca4d0996101c8b2166b142.png)![]()**编辑**
+![alt text](image-14.png)
 
 那除了以上的三个基本参数以外，其实在模型整合这一步还是其他很多的可选参数，包括：
 
@@ -711,7 +673,7 @@ xtuner convert merge /root/ft/model /root/ft/huggingface /root/ft/final_model
 xtuner chat /root/ft/final_model --prompt-template internlm2_chat
 ```
 
-![]()
+
 
 我们可以通过一些简单的测试来看看微调后的模型的能力。
 
@@ -735,7 +697,6 @@ double enter to end input (EXIT: exit chat, RESET: reset history) >>> EXIT
 Log: Exit!
 ```
 
-![]()
 
 可以看到模型已经严重过拟合，回复的话就只有 “我是剑锋大佬的小助手，内在是上海AI实验室书生·浦语的1.8B大模型哦” 这句话。我们下面可以通过对比原模型的能力来看看差异。
 
@@ -760,7 +721,6 @@ double enter to end input (EXIT: exit chat, RESET: reset history) >>> EXIT
 Log: Exit!
 ```
 
-![]()
 
 可以看到在没有进行我们数据的微调前，原模型是能够输出有逻辑的回复，并且也不会认为他是我们特有的小助手。因此我们可以很明显的看出两者之间的差异性。
 
@@ -1106,8 +1066,6 @@ if __name__ == '__main__':
     main()
 ```
 
-![]()
-
 在运行前，我们还需要做的就是将端口映射到本地。那首先我们使用快捷键组合 `Windows + R`（Windows 即开始菜单键）打开指令界面，并输入命令，按下回车键。（Mac 用户打开终端即可）
 
 ```
@@ -1128,7 +1086,7 @@ streamlit run /root/ft/web_demo/InternLM/chat/web_demo.py --server.address 127.0
 
 ##### 遇到bug
 
-![](https://i-blog.csdnimg.cn/direct/d96f94dc3f9148b19f189c2d0ea43b94.png)![]()**编辑**
+![alt text](image-15.png)
 
 库冲突
 
@@ -1142,8 +1100,7 @@ pip install 'transformers==4.41.2'
 
 效果图如下：
 
-![](https://i-blog.csdnimg.cn/direct/071f7a9a369548a9ae5dac186d15fd97.png)![]()**编辑**
-
+![alt text](image-16.png)
 假如我们还想和原来的 InternLM2-Chat-1.8B 模型对话（即在 `/root/ft/model` 这里的模型对话），我们其实只需要修改183行和186行的文件地址即可。
 
 ```
@@ -1156,8 +1113,7 @@ pip install 'transformers==4.41.2'
 + tokenizer = AutoTokenizer.from_pretrained('/root/ft/model',
 ```
 
-![](https://i-blog.csdnimg.cn/direct/c103175498e4490aa392aba62d59d3b6.png)![]()**编辑**
-
+![alt text](image-17.png)
 加载完成后输入同样的问题 `请介绍一下你自己` 之后我们可以看到两个模型截然不同的回复：
 
 #### 2.5.5 小结
@@ -1175,8 +1131,7 @@ pip install 'transformers==4.41.2'
 ## 基础作业（1.8B微调、部署）
 
 过程在2.4 、2.5
-
-![](https://i-blog.csdnimg.cn/direct/071f7a9a369548a9ae5dac186d15fd97.png)![]()**编辑**
+![alt text](image-18.png)
 
 ## 进阶作业
 
@@ -1184,11 +1139,12 @@ pip install 'transformers==4.41.2'
 
 现在1.openXlan创建账号，2.在密钥管理中上次ssh密钥，
 
-![](https://i-blog.csdnimg.cn/direct/ba51015772f94407b22144c9affc210b.png)![]()**编辑**
+![alt text](image-19.png)
 
  4.点击创建模型
 
-取个名字，进入仓库 ，复制git clone 命令到服务器![](https://i-blog.csdnimg.cn/direct/5089f47945e9486085ecfcdb4d7e9f3c.png)![]()**编辑**
+取个名字，进入仓库 ，复制git clone 命令到服务器
+![alt text](image-20.png)
 
 将模型复制到仓库
 
@@ -1215,7 +1171,6 @@ git config --global user.name "Username"
 git config --global user.email "email@email.com"
 ```
 
-![]()
 
  在clone的仓库中
 
@@ -1227,13 +1182,12 @@ git commit -m "upload model"
 git push
 ```
 
-![]()
 
 如果需要输入密码：
 
 打开OpenXlab 添加访问令牌 “可写”
 
-![](https://i-blog.csdnimg.cn/direct/36f58401778540f5850fdf088e067f04.png)![]()**编辑**
+![alt text](image-21.png)
 
  完成上传后的效果：
 
@@ -1249,4 +1203,4 @@ OpenXLab 部署教程：[Tutorial/tools/openxlab-deploy at camp2 · InternLM/Tut
 
  为了简单起见
 
-![](https://i-blog.csdnimg.cn/direct/1f3539d8c5694662982349233cc158aa.png)![]()**编辑**
+![alt text](image-22.png)

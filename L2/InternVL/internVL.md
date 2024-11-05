@@ -21,13 +21,13 @@ mkdir -p model
 
 ## 复制 模型，空间不够也可以软连接
 
-cp -r /root/share/new_models/OpenGVLab/InternVL2-2B /root/model/
+ln -s /root/share/new_models/OpenGVLab/InternVL2-2B /root/models/
 
 # 准备环境
 # 这里我们来手动配置下xtuner。
 
 # 配置虚拟环境
-conda create --name xtuner python=3.10 -y
+# conda create --name xtuner python=3.10 -y
 
 # 激活虚拟环境（注意：后续的所有操作都需要在这个虚拟环境中进行）
 conda activate xtuner

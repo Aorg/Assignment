@@ -179,4 +179,4 @@ https://magicmaker.openxlab.org.cn/gw/edit-anything/api/v1/bff/sd/generate
 ![alt text](image/image-5.png)
 ![alt text](image/image-6.png)
 搜索论文正常
-![alt text](image/image7.png)
+![alt text](image/image-7.png)

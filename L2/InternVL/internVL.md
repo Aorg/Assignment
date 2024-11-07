@@ -323,18 +323,19 @@ NPROC_PER_NODE=1 xtuner train /root/InternLM/code/XTuner/xtuner/configs/internvl
 
 ```
 ![alt text](image-8.png)
+![alt text](image-9.png)
 
 ### 合并权重&&模型转换
 用官方脚本进行权重合并
 
-如果这里你执行的epoch不是6，是小一些的数字。你可能会发现internvl_ft_run_8_filter下没有iter_3000.pth, 那你需要把iter_3000.pth切换成你internvl_ft_run_8_filter目录下的pth即可。
+work_dir/internvl_ft_run_8_filter/iter_xxx.pth.pth, 替换相应文件即可。
 ```bash
 cd XTuner
 # transfer weights
-python3 xtuner/configs/internvl/v1_5/convert_to_official.py xtuner/configs/internvl/v2/internvl_v2_internlm2_2b_qlora_finetune.py /root/InternLM/work_dir/internvl_ft_run_8_filter/iter_3000.pth /root/InternLM/InternVL2-2B/
+python3 xtuner/configs/internvl/v1_5/convert_to_official.py xtuner/configs/internvl/v2/internvl_v2_internlm2_2b_qlora_finetune.py /root/InternLM/work_dir/internvl_ft_run_8_filter/iter_xxx.pth /root/InternLM/InternVL2-2B/
 ```
-最后我们的模型在：/root/InternLM/convert_model/，文件格式：
-```
+最后我们的模型在：/root/InternLM/InternVL2-2B/，合成模型文件格式和workdir文件格式：
+<!-- ```
 .
 |-- added_tokens.json
 |-- config.json
@@ -351,23 +352,41 @@ python3 xtuner/configs/internvl/v1_5/convert_to_official.py xtuner/configs/inter
 |-- tokenization_internlm2.py
 |-- tokenizer.model
 `-- tokenizer_config.json
-```
-微调后效果对比
-现在我们微调好啦，让我们再来试试这张图片吧！
+``` -->
+![alt text](image-16.png)
 
-image
 
-我们把下面的代码替换进test_lmdeploy.py中，然后跑一下效果。
+#### 微调后效果对比
+将合成模型地址放入
 ```python
 from lmdeploy import pipeline
 from lmdeploy.vl import load_image
-
+#合并后的模型
 pipe = pipeline('/root/InternLM/InternVL2-2B')
 
 image = load_image('/root/InternLM/007aPnLRgy1hb39z0im50j30ci0el0wm.jpg')
 response = pipe(('请你根据这张图片，讲一个脑洞大开的梗', image))
 print(response.text)
+```
+```bash
 cd /root/InternLM/code
-
 python3 test_lmdeploy.py
 ```
+微调前
+![alt text](image-11.png)
+
+微调后
+
+![alt text](image-12.png)
+
+lora训练
+
+同参数下比qlora整体收敛更快
+![alt text](image-14.png)
+![alt text](image-15.png)
+
+显存占用比qlora高
+
+![alt text](image-17.png)
+
+

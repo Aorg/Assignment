@@ -372,6 +372,8 @@ print(response.text)
 cd /root/InternLM/code
 python3 test_lmdeploy.py
 ```
+![alt text](image-19.png)
+'请你根据这张图片，讲一个脑洞大开的梗'
 微调前
 ![alt text](image-11.png)
 
@@ -389,4 +391,9 @@ lora训练
 
 ![alt text](image-17.png)
 
+![alt text](image-19.png)
+'请你根据这张图片，讲一个脑洞大开的梗'
+lora微调结果
+![alt text](image-18.png)
 
+还真挺会玩梗的！

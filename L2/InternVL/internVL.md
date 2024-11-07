@@ -356,7 +356,7 @@ python3 xtuner/configs/internvl/v1_5/convert_to_official.py xtuner/configs/inter
 ![alt text](image-16.png)
 
 
-#### 微调后效果对比
+### 微调后效果对比
 将合成模型地址放入
 ```python
 from lmdeploy import pipeline
@@ -374,14 +374,14 @@ python3 test_lmdeploy.py
 ```
 ![alt text](image-19.png)
 '请你根据这张图片，讲一个脑洞大开的梗'
-微调前
+#### 微调前
 ![alt text](image-11.png)
 
-微调后
+#### 微调后
 
 ![alt text](image-12.png)
 
-lora训练
+# lora训练
 
 同参数下比qlora整体收敛更快
 ![alt text](image-14.png)
@@ -393,7 +393,7 @@ lora训练
 
 ![alt text](image-19.png)
 '请你根据这张图片，讲一个脑洞大开的梗'
-lora微调结果
+### lora微调结果
 ![alt text](image-18.png)
 
 还真挺会玩梗的！

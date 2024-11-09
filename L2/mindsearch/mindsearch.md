@@ -61,7 +61,7 @@ touch /root/mindsearch/mindsearch_deploy/app.py
 ```
 ```bash
 git clone https://huggingface.co/spaces/<repo_path>
-git remote set-url origin https://Ruiy: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@huggingface.co/spaces/Ruiy/test_mindsearch
+git remote set-url origin https://Ruiy:<huggingface write token>@huggingface.co/spaces/Ruiy/test_mindsearch
 
 ```
 ![alt text](image-11.png)

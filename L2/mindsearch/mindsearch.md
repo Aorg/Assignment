@@ -1,5 +1,5 @@
 # Mindsearch
-利用硅基流动免费api调用大模型，codespace跑通
+利用硅基流动免费api调用大模型，通过github codespace，上传至huggingface(git codespace 传至huggingface不需要梯子)
 ## 硅基流动 API Keyapi
 <https://cloud.siliconflow.cn/account/ak>
 注册
@@ -40,6 +40,8 @@ python frontend/mindsearch_gradio.py
 ![alt text](image-5.png)
 ![alt text](image-9.png)
 报错有可能包冲突
+字体设置看这里：
+https://blog.csdn.net/Aorg1/article/details/138609956
 
 # 部署到huggingface
 将 MindSearch 部署到 HuggingFace Space。
@@ -61,8 +63,21 @@ touch /root/mindsearch/mindsearch_deploy/app.py
 ```
 ```bash
 git clone https://huggingface.co/spaces/<repo_path>
-git remote set-url origin https://Ruiy:<huggingface write token>@huggingface.co/spaces/Ruiy/test_mindsearch
-
 ```
 ![alt text](image-11.png)
+我的会生成test_mindsearch文件
+```bash
+-cp -r /workspace/mindsearch/MindSearch/mindsearch /workspace/mindsearch/test_mindsearch
+-cp /workspace/mindsearch/MindSearch/mindsearch/requirements.txt /workspace/mindsearch/test_mindsearch
+git add .
+git commit -m 'mindsearch'
+git remote set-url origin https://Ruiy:<token>@huggingface.co/spaces/Ruiy/test_mindsearch
+git push
+```
+token 点击头像选择acess token ，write 权限复制token
+已上传至huggingface 
+回到huggingface页面，点击app
+开始自动安装
+![alt text](image-12.png)
+
 

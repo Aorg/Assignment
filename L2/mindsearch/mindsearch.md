@@ -36,3 +36,33 @@ conda activate mindsearch
 cd /workspaces/mindsearch/MindSearch
 python frontend/mindsearch_gradio.py
 ```
+![alt text](image-7.png)
+![alt text](image-5.png)
+![alt text](image-9.png)
+报错有可能包冲突
+
+# 部署到huggingface
+将 MindSearch 部署到 HuggingFace Space。
+打开 https://huggingface.co/spaces ，
+并点击 Create new Space，如下图所示
+![alt text](image-8.png)
+点击setting
+![alt text](image-10.png)
+
+本地创建目录
+```bash
+mkdir -p /root/mindsearch/mindsearch_deploy
+# 准备复制文件
+cd /root/mindsearch
+cp -r /root/mindsearch/MindSearch/mindsearch /root/mindsearch/mindsearch_deploy
+cp /root/mindsearch/MindSearch/requirements.txt /root/mindsearch/mindsearch_deploy
+# 创建 app.py 作为程序入口
+touch /root/mindsearch/mindsearch_deploy/app.py
+```
+```bash
+git clone https://huggingface.co/spaces/<repo_path>
+git remote set-url origin https://Ruiy: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@huggingface.co/spaces/Ruiy/test_mindsearch
+
+```
+![alt text](image-11.png)
+
